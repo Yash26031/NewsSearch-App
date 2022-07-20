@@ -24,6 +24,25 @@ const reducer = (state, action) => {
         ...state,
         query: action.payload,
       };
+
+    case "Next_Page":
+      return {
+        ...state,
+        page: state.page + 1,
+      };
+
+    case "Prev_Page":
+      let pageNum = state.page;
+
+      if (pageNum <= 0) {
+        pageNum = 0;
+      } else {
+        pageNum = pageNum - 1;
+      }
+      return {
+        ...state,
+        page: pageNum,
+      };
   }
   return state;
 };

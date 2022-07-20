@@ -1,5 +1,7 @@
 import React, { memo } from "react";
 import { useGlobalContext } from "../Context";
+import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 
 const SearchPage = () => {
   const { hits, nbPages, isLoading, removePost, query } = useGlobalContext();
@@ -23,22 +25,24 @@ const SearchPage = () => {
         const { title, author, num_comments, url, objectID } = data;
         return (
           <div key={objectID} className="p-5 my-5 bg-white">
-            <h1 className="text-lg font-bold ">{title}</h1>
-            <div className="my-2">
-              <p className="text-xs font-semibold text-gray-400">
-                By
-                <span className="ml-2 text-sm font-bold text-gray-600">
-                  {author}
-                </span>
-                <span className="mx-2">&</span>
-                <span className="text-sm font-bold text-gray-600">
-                  {num_comments}
-                </span>
-                <span className="ml-2 text-xs font-semibold text-gray-400">
-                  comments
-                </span>
-              </p>
-            </div>
+            <Link to={`${objectID}/detail`}>
+              <h1 className="text-lg font-bold ">{title}</h1>
+              <div className="my-2">
+                <p className="text-xs font-semibold text-gray-400">
+                  By
+                  <span className="ml-2 text-sm font-bold text-gray-600">
+                    {author}
+                  </span>
+                  <span className="mx-2">&</span>
+                  <span className="text-sm font-bold text-gray-600">
+                    {num_comments}
+                  </span>
+                  <span className="ml-2 text-xs font-semibold text-gray-400">
+                    comments
+                  </span>
+                </p>
+              </div>
+            </Link>
             <div className="flex justify-between py-2">
               <a
                 className="text-sm font-semibold text-blue-600"
@@ -58,6 +62,9 @@ const SearchPage = () => {
           </div>
         );
       })}
+      <div className="flex items-center justify-center w-full my-4">
+        <Pagination />
+      </div>
     </div>
   );
 };

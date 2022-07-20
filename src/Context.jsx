@@ -55,11 +55,25 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const nextPage = () => {
+    dispatch({
+      type: "Next_Page",
+    });
+  };
+
+  const prevPage = () => {
+    dispatch({
+      type: "Prev_Page",
+    });
+  };
+
   useEffect(() => {
     getNews();
-  }, [state.query]);
+  }, [state.query, state.page]);
   return (
-    <AppContext.Provider value={{ ...state, removePost, searchPost }}>
+    <AppContext.Provider
+      value={{ ...state, removePost, searchPost, nextPage, prevPage }}
+    >
       {children}
     </AppContext.Provider>
   );
